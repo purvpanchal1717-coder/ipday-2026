@@ -6,12 +6,19 @@
 
 <style>
 
-body {
+/* GLOBAL FIX */
+* { box-sizing: border-box; }
+
+html, body {
     margin:0;
+    overflow-x:hidden;
+}
+
+/* BODY */
+body {
     font-family:'Segoe UI', sans-serif;
     color:white;
     text-align:center;
-    overflow-x:hidden;
 
     background:
     linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.95)),
@@ -33,15 +40,17 @@ body {
     z-index:1000;
 }
 
+/* CONTAINER */
 .container {
-    padding:80px 20px;
+    padding:80px 15px;
 }
 
+/* CARDS */
 .card {
     background:rgba(0,0,0,0.6);
     padding:20px;
     margin:20px auto;
-    width:90%;
+    width:100%;
     max-width:600px;
     border-radius:12px;
     border:1px solid #00f0ff33;
@@ -49,29 +58,23 @@ body {
 
 h1, h2 { color:#00f0ff; }
 
-/* MOBILE FIX */
+/* MOBILE */
 @media (max-width:768px){
 
     .container {
-        padding:60px 15px;
+        padding:60px 10px;
     }
 
     .card {
-        width:95%;
+        width:100%;
+        max-width:95%;
+        margin:15px auto;
         padding:18px;
     }
 
-    h1 {
-        font-size:26px;
-    }
-
-    h2 {
-        font-size:18px;
-    }
-
-    p {
-        font-size:14px;
-    }
+    h1 { font-size:26px; }
+    h2 { font-size:18px; }
+    p { font-size:14px; }
 
     .back-btn {
         top:10px;
