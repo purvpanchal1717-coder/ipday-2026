@@ -4,6 +4,40 @@
 <title>Line Follower</title>
 
 <style>
+
+/* Smooth fade-in animation */
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeUp 1s ease forwards;
+}
+
+@keyframes fadeUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Button hover effect */
+.btn {
+    transition: 0.3s;
+}
+
+.btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px #00f0ff;
+}
+
+/* Card animation */
+.card {
+    transition: 0.4s;
+}
+
+.card:hover {
+    transform: translateY(-12px) scale(1.03);
+}
+
 body {
     margin:0;
     font-family:Segoe UI;

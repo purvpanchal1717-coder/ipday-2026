@@ -4,6 +4,75 @@
 <title>Esports - IP Day</title>
 
 <style>
+
+body::before {
+    content: "";
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, #00f0ff22, transparent);
+    animation: pulse 5s infinite alternate;
+    z-index: -1;
+}
+
+@keyframes pulse {
+    from { opacity: 0.3; }
+    to { opacity: 0.6; }
+}
+
+.back-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background: #00f0ff;
+    color: black;
+    padding: 10px 15px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    box-shadow: 0 0 10px #00f0ff;
+    transition: 0.3s;
+    z-index: 1000;
+}
+
+.back-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px #00f0ff;
+}
+
+/* Smooth fade-in animation */
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeUp 1s ease forwards;
+}
+
+@keyframes fadeUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Button hover effect */
+.btn {
+    transition: 0.3s;
+}
+
+.btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px #00f0ff;
+}
+
+/* Card animation */
+.card {
+    transition: 0.4s;
+}
+
+.card:hover {
+    transform: translateY(-12px) scale(1.03);
+}
+
 body {
     margin:0;
     font-family:Segoe UI;
@@ -30,6 +99,8 @@ h2 { color:#00f0ff; }
 </head>
 
 <body>
+
+<a href="index.html" class="back-btn">⬅ Back</a>
 
 <div class="container">
 
