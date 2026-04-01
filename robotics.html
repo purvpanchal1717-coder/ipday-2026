@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Robotics - IP Day</title>
+
+<style>
+body {
+    margin:0;
+    font-family:Segoe UI;
+    color:white;
+    text-align:center;
+
+    /* BACKGROUND FIX */
+    background:
+    linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.95)),
+    url('bck.jpg') center/cover no-repeat fixed;
+
+    animation: fadeIn 0.6s ease;
+}
+
+/* ANIMATION */
+@keyframes fadeIn {
+    from { opacity:0; transform: translateY(20px); }
+    to { opacity:1; transform: translateY(0); }
+}
+
+.container {
+    padding:100px 20px;
+}
+
+.card {
+    background:rgba(0,0,0,0.7);
+    padding:20px;
+    margin:20px auto;
+    width:90%;
+    max-width:500px;
+    border-radius:12px;
+    transition:0.3s;
+    border:1px solid rgba(0,240,255,0.2);
+}
+
+.card:hover {
+    transform:scale(1.05);
+    box-shadow:0 0 20px #00f0ff;
+}
+
+h1 {
+    color:#00f0ff;
+    text-shadow:0 0 15px #00f0ff;
+}
+
+h2 {
+    color:#00f0ff;
+}
+
+a {
+    text-decoration:none;
+    color:white;
+}
+
+.back {
+    display:inline-block;
+    margin-top:20px;
+    color:#00f0ff;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>🤖 Robotics Events</h1>
+
+<a href="linefollower.html">
+    <div class="card">
+        <h2>Line Follower</h2>
+        <p>Click to view full rules</p>
+    </div>
+</a>
+
+<a href="roborace.html">
+    <div class="card">
+        <h2>Robo Race</h2>
+        <p>Click to view full rules</p>
+    </div>
+</a>
+
+<a href="index.html" class="back">⬅ Back to Home</a>
+
+</div>
+
+</body>
+</html>

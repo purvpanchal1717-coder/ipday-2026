@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>IP Day 2026</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+
+
+.cta {
+    padding:100px 20px;
+    text-align:center;
+}
+
+.cta h2 {
+    color:#00f0ff;
+    text-shadow:0 0 10px #00f0ff;
+    font-size:30px;
+}
+
+.cta p {
+    opacity:0.8;
+    margin-bottom:20px;
+}
+
+/* BIG BUTTON */
+.cta-btn {
+    padding:15px 35px;
+    font-size:18px;
+    border:none;
+    border-radius:50px;
+    background:linear-gradient(45deg, #00f0ff, #00ffa6);
+    color:black;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+/* HOVER EFFECT */
+.cta-btn:hover {
+    transform:scale(1.1);
+    box-shadow:0 0 25px #00f0ff;
+}
+
+/* PAGE FADE ANIMATION */
+body {
+    animation: fadeIn 0.6s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity:0; transform: translateY(20px); }
+    to { opacity:1; transform: translateY(0); }
+}
+
+body {
+    margin:0;
+    font-family: 'Segoe UI', sans-serif;
+    background:#000;
+    color:white;
+    text-align:center;
+}
+
+/* HERO */
+.hero {
+    padding:120px 20px 180px;
+    position:relative;
+    background:
+    url('https://images.unsplash.com/photo-1542751371-adc38448a05e') center/cover;
+}
+
+/* FADE */
+.hero::after {
+    content:"";
+    position:absolute;
+    bottom:0;
+    left:0;
+    width:100%;
+    height:200px;
+    background:linear-gradient(to bottom, transparent, #000);
+}
+
+h1 {
+    color:#00f0ff;
+    font-size:60px;
+    text-shadow:0 0 20px #00f0ff;
+}
+
+/* COUNTDOWN */
+.countdown {
+    margin-top:20px;
+    font-size:20px;
+    color:#00f0ff;
+}
+
+/* BUTTON */
+.btn {
+    margin-top:20px;
+    padding:12px 25px;
+    border:2px solid #00f0ff;
+    color:#00f0ff;
+    background:transparent;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.btn:hover {
+    background:#00f0ff;
+    color:black;
+    box-shadow:0 0 20px #00f0ff;
+}
+
+/* INFO */
+.info {
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    flex-wrap:wrap;
+    margin-top:-100px;
+    padding:40px 20px;
+    position:relative;
+    z-index:2;
+}
+
+.info-box {
+    background:rgba(0,0,0,0.7);
+    padding:20px;
+    border-radius:12px;
+    width:220px;
+    border:1px solid rgba(0,240,255,0.2);
+    transition:0.3s;
+}
+
+.info-box:hover {
+    transform:scale(1.05);
+    box-shadow:0 0 15px #00f0ff;
+}
+
+.info-box h3 {
+    color:#00f0ff;
+}
+
+/* EVENTS */
+.grid {
+    display:flex;
+    justify-content:center;
+    gap:30px;
+    flex-wrap:wrap;
+    padding:80px 20px;
+}
+
+.card {
+    width:300px;
+    background:rgba(255,255,255,0.05);
+    backdrop-filter:blur(10px);
+    padding:15px;
+    border-radius:15px;
+    border:1px solid rgba(0,240,255,0.2);
+    transition:0.4s;
+}
+
+.card:hover {
+    transform:translateY(-15px) scale(1.05);
+    box-shadow:0 0 40px #00f0ff;
+}
+
+.card img {
+    width:100%;
+    height:180px;
+    object-fit:cover;
+    border-radius:12px;
+}
+
+.card h3 {
+    color:#00f0ff;
+}
+
+/* CTA SECTION */
+.cta {
+    padding:80px 20px;
+}
+
+.cta h2 {
+    color:#00f0ff;
+    text-shadow:0 0 10px #00f0ff;
+}
+
+/* ABOUT */
+.about {
+    padding:80px 20px;
+    max-width:900px;
+    margin:auto;
+    line-height:1.6;
+}
+
+.about h2 {
+    color:#00f0ff;
+    text-shadow:0 0 10px #00f0ff;
+}
+
+a {
+    text-decoration:none;
+    color:white;
+}
+</style>
+</head>
+
+<body>
+
+<!-- HERO -->
+<div class="hero">
+    <h1>🔥 IP Day 2026 🔥</h1>
+    <p>Innovation • Sports • Technology</p>
+
+    <!-- COUNTDOWN -->
+    <div class="countdown" id="countdown">Loading...</div>
+
+    <!-- CTA BUTTON -->
+    <a href="YOUR_GOOGLE_FORM_LINK" target="_blank">
+        <button class="btn">🚀 Register Now</button>
+    </a>
+</div>
+
+<!-- INFO -->
+<div class="info">
+    <div class="info-box">
+        <h3>📅 Date</h3>
+        <p>1st–2nd April 2026</p>
+    </div>
+
+    <div class="info-box">
+        <h3>📍 Venue</h3>
+        <p>Government Polytechnic Ahmedabad</p>
+    </div>
+
+    <div class="info-box">
+        <h3>👨‍💼 Organizer</h3>
+        <p>Project & Innovation Lab</p>
+    </div>
+</div>
+
+<!-- EVENTS -->
+<div class="grid">
+
+    <a href="esports.html">
+        <div class="card">
+            <img src="esports.jpg">
+            <h3>🎮 Free Fire Tournament</h3>
+            <p>Click to view details & rules</p>
+        </div>
+    </a>
+
+    <a href="robotics.html">
+        <div class="card">
+            <img src="robotics.jpg">
+            <h3>🤖 Robotics Events</h3>
+            <p>Line Follower & Robo Race</p>
+        </div>
+    </a>
+
+</div>
+
+<!-- CTA SECTION --><!-- PREMIUM CTA -->
+<div class="cta">
+    <h2>🚀 Ready to Participate?</h2>
+    <p>Join IP Day 2026 and showcase your skills in Esports & Robotics</p>
+
+    <a href="YOUR_GOOGLE_FORM_LINK" target="_blank">
+        <button class="cta-btn">🔥 Register Now</button>
+    </a>
+</div>
+
+<!-- ABOUT -->
+<div class="about">
+    <h2>🌍 What is IP Day?</h2>
+
+    <p>
+        World Intellectual Property Day is celebrated globally to spread awareness about the importance of innovation, creativity, and protecting ideas through intellectual property rights such as patents, copyrights, and trademarks.
+    </p>
+
+    <p>
+        Intellectual Property (IP) plays a key role in encouraging inventors, engineers, and creators to develop new technologies and solutions by giving them recognition and ownership of their work.
+    </p>
+
+    <p>
+        The 2026 theme, <b>“IP and Sports: Ready, Set, Innovate!”</b>, highlights how technology is transforming modern sports. From smart wearables and performance tracking systems to AI-based training tools, innovation is shaping the future of sports.
+    </p>
+
+    <p>
+        IP Day 2026 at Government Polytechnic Ahmedabad is organized by the <b>Project & Innovation Lab</b> to promote innovation, startup culture, and technical creativity among students.
+    </p>
+
+    <p>
+        Through activities like esports competitions, robotics challenges, workshops, and innovation showcases, this event aims to inspire students to build, innovate, and transform their ideas into real-world solutions.
+    </p>
+
+</div>
+
+<!-- COUNTDOWN SCRIPT -->
+<script>
+const eventDate = new Date("May 1, 2026 00:00:00").getTime();
+
+const timer = setInterval(function() {
+    const now = new Date().getTime();
+    const distance = eventDate - now;
+
+    if (distance <= 0) {
+        clearInterval(timer);
+        document.getElementById("countdown").innerHTML = "🔥 Event Live!";
+        return;
+    }
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+
+    document.getElementById("countdown").innerHTML =
+        "⏳ Starts in: " + days + "d " + hours + "h " + minutes + "m";
+
+}, 1000);
+</script>
+
+<script>
+document.querySelectorAll("a").forEach(link => {
+    link.addEventListener("click", function(e) {
+        if (this.href && !this.target) {
+            e.preventDefault();
+            document.body.style.opacity = 0;
+            setTimeout(() => {
+                window.location = this.href;
+            }, 300);
+        }
+    });
+});
+</script>
+
+</body>
+</html>
