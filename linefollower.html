@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Esports - IP Day</title>
+<title>Line Follower</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
@@ -22,7 +22,7 @@ body {
 
     background:
     linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.95)),
-    url('https://images.unsplash.com/photo-1511512578047-dfb367046420') center/cover no-repeat;
+    url('images/linefollower.jpg') center/cover no-repeat;
 }
 
 /* BACK BUTTON */
@@ -56,14 +56,7 @@ body {
     border:1px solid #00f0ff33;
 }
 
-/* HEADINGS */
-h1 {
-    margin-bottom:30px;
-}
-
-h2 {
-    color:#00f0ff;
-}
+h1, h2 { color:#00f0ff; }
 
 /* MOBILE */
 @media (max-width:768px){
@@ -96,57 +89,54 @@ h2 {
 
 <body>
 
-<a href="index.html" class="back-btn">⬅ Back</a>
+<a href="robotics.html" class="back-btn">⬅ Back</a>
 
 <div class="container">
 
-<h1>🎮 Free Fire Tournament</h1>
+<h1>🤖 Line Following Robot</h1>
 
 <div class="card">
-<h2>📌 Match Information</h2>
-<p>Mode: Squad (4 Players)</p>
-<p>Map: Bermuda</p>
-<p>Match Type: Custom Room</p>
-<p>Entry: College ID Card compulsory</p>
+<h2>Robot Specifications</h2>
+<p>• Max size: 30×30×30 cm</p>
+<p>• Max weight: 1.5 kg</p>
+<p>• Fully autonomous</p>
+<p>• Must be self-built</p>
 </div>
 
 <div class="card">
-<h2>👥 Team Rules</h2>
-<p>• 4 players per team</p>
-<p>• Only college students allowed</p>
-<p>• Unique team name required</p>
-<p>• No player replacement without permission</p>
+<h2>Track Details</h2>
+<p>• 20mm black line on white surface</p>
+<p>• Includes turns & junctions</p>
+<p>• Obstacle & ramp zones possible</p>
 </div>
 
 <div class="card">
-<h2>⚠️ General Rules</h2>
-<p>• Carry college ID</p>
-<p>• Join on time</p>
-<p>• No hacking or cheating</p>
-<p>• No teaming with others</p>
-<p>• Maintain discipline</p>
+<h2>During the Run</h2>
+<p>• 2 attempts (best time counts)</p>
+<p>• Reset allowed at checkpoint</p>
+<p>• No reprogramming</p>
 </div>
 
 <div class="card">
-<h2>📶 Important Notes</h2>
-<p>• Stable internet required</p>
-<p>• No restart for disconnection</p>
-<p>• Organizer decision final</p>
+<h2>Scoring</h2>
+<p>• Fastest time wins</p>
+</div>
+
+<div class="card">
+<h2>Common Rules</h2>
+<p>• Team size: 4</p>
+<p>• Judge decision final</p>
 </div>
 
 </div>
 
 <script>
 document.querySelectorAll("a").forEach(link => {
-    if (link.href && !link.target) {
-        link.addEventListener("click", function(e) {
-            e.preventDefault();
-            document.body.style.opacity = 0;
-            setTimeout(() => {
-                window.location = this.href;
-            }, 300);
-        });
-    }
+    link.addEventListener("click", function(e) {
+        e.preventDefault();
+        document.body.style.opacity = 0;
+        setTimeout(() => window.location = this.href, 300);
+    });
 });
 </script>
 
