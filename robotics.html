@@ -19,6 +19,14 @@
     }
 }
 
+body {
+    transition: opacity 0.3s ease;
+}
+
+.fade-out {
+    opacity: 0;
+}
+
 /* Button hover effect */
 .btn {
     transition: 0.3s;
@@ -96,6 +104,28 @@ a {
     margin-top:20px;
     color:#00f0ff;
 }
+
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s ease;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+.cursor-glow {
+    position: fixed;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, #00f0ff55, transparent);
+    pointer-events: none;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+}
+
 </style>
 </head>
 
@@ -122,6 +152,31 @@ a {
 <a href="index.html" class="back">⬅ Back to Home</a>
 
 </div>
+
+<script>
+document.querySelectorAll("a").forEach(link => {
+    if (link.href && !link.target) {
+        link.addEventListener("click", function(e) {
+            e.preventDefault();
+            document.body.classList.add("fade-out");
+            setTimeout(() => {
+                window.location = this.href;
+            }, 300);
+        });
+    }
+});
+</script>
+
+<script>
+const glow = document.createElement("div");
+glow.classList.add("cursor-glow");
+document.body.appendChild(glow);
+
+document.addEventListener("mousemove", e => {
+    glow.style.left = e.clientX + "px";
+    glow.style.top = e.clientY + "px";
+});
+</script>
 
 </body>
 </html>
