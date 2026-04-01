@@ -6,6 +6,15 @@
 
 <style>
 
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+* {
+    box-sizing: border-box;
+}
+
 .info {
     margin-top: -120px; /* pull cards INTO hero */
     position: relative;
@@ -143,7 +152,9 @@ h1 {
 }
 
 .card {
-    width:280px;
+    width:100%;              /* full width */
+    max-width:280px;        /* keeps desktop same */
+    margin:0 auto;          /* center it */
     background:rgba(255,255,255,0.05);
     padding:15px;
     border-radius:15px;
@@ -169,7 +180,8 @@ h1 {
 
 /* CTA */
 .cta {
-    padding:80px 20px;
+    padding:60px 15px;
+     max-width:100%;
 }
 
 .cta-btn {
