@@ -2,106 +2,91 @@
 <html>
 <head>
 <title>Line Follower</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 
-/* Smooth fade-in animation */
-.fade-in {
-    opacity: 0;
-    transform: translateY(30px);
-    animation: fadeUp 1s ease forwards;
-}
-
-@keyframes fadeUp {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-body {
-    transition: opacity 0.3s ease;
-}
-
-.fade-out {
-    opacity: 0;
-}
-
-/* Button hover effect */
-.btn {
-    transition: 0.3s;
-}
-
-.btn:hover {
-    transform: scale(1.1);
-    box-shadow: 0 0 20px #00f0ff;
-}
-
-/* Card animation */
-.card {
-    transition: 0.4s;
-}
-
-.card:hover {
-    transform: translateY(-12px) scale(1.03);
-}
-
 body {
     margin:0;
-    font-family:Segoe UI;
+    font-family:'Segoe UI', sans-serif;
     color:white;
     text-align:center;
+    overflow-x:hidden;
 
     background:
-    linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.95)),
-    url('images/linefollower.jpg') center/cover no-repeat fixed;
+    linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.95)),
+    url('images/linefollower.jpg') center/cover no-repeat;
 }
 
-.container { padding:100px 20px; }
+/* BACK BUTTON */
+.back-btn {
+    position:fixed;
+    top:20px;
+    left:20px;
+    background:#00f0ff;
+    color:black;
+    padding:10px 15px;
+    border-radius:8px;
+    text-decoration:none;
+    font-weight:bold;
+    box-shadow:0 0 10px #00f0ff;
+    z-index:1000;
+}
+
+.container {
+    padding:80px 20px;
+}
 
 .card {
-    background:rgba(0,0,0,0.7);
+    background:rgba(0,0,0,0.6);
     padding:20px;
     margin:20px auto;
     width:90%;
     max-width:600px;
     border-radius:12px;
-    border:1px solid rgba(0,240,255,0.2);
-}
-
-.card:hover {
-    box-shadow:0 0 20px #00f0ff;
-}
-
-.reveal {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: all 0.8s ease;
-}
-
-.reveal.active {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.cursor-glow {
-    position: fixed;
-    width: 200px;
-    height: 200px;
-    background: radial-gradient(circle, #00f0ff55, transparent);
-    pointer-events: none;
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 0;
+    border:1px solid #00f0ff33;
 }
 
 h1, h2 { color:#00f0ff; }
 
-a { color:#00f0ff; text-decoration:none; }
+/* MOBILE FIX */
+@media (max-width:768px){
+
+    .container {
+        padding:60px 15px;
+    }
+
+    .card {
+        width:95%;
+        padding:18px;
+    }
+
+    h1 {
+        font-size:26px;
+    }
+
+    h2 {
+        font-size:18px;
+    }
+
+    p {
+        font-size:14px;
+    }
+
+    .back-btn {
+        top:10px;
+        left:10px;
+        padding:8px 12px;
+        font-size:12px;
+    }
+}
+
 </style>
 </head>
 
 <body>
+
+<a href="robotics.html" class="back-btn">⬅ Back</a>
 
 <div class="container">
 
@@ -111,66 +96,44 @@ a { color:#00f0ff; text-decoration:none; }
 <h2>Robot Specifications</h2>
 <p>• Max size: 30×30×30 cm</p>
 <p>• Max weight: 1.5 kg</p>
-<p>• Fully autonomous (no remote)</p>
+<p>• Fully autonomous</p>
 <p>• Must be self-built</p>
 </div>
 
 <div class="card">
 <h2>Track Details</h2>
-<p>• Black line (20mm width) on white surface</p>
-<p>• Track includes curves, turns, and junctions</p>
-<p>• Obstacle zones may be present</p>
-<p>• Ramp sections may be included</p>
+<p>• 20mm black line on white surface</p>
+<p>• Includes turns & junctions</p>
+<p>• Obstacle & ramp zones possible</p>
 </div>
 
 <div class="card">
 <h2>During the Run</h2>
-<p>• 2 attempts allowed (best time counts)</p>
-<p>• Robot can be reset at checkpoint</p>
-<p>• No reprogramming allowed</p>
-<p>• Sensor adjustment allowed with permission</p>
+<p>• 2 attempts (best time counts)</p>
+<p>• Reset allowed at checkpoint</p>
+<p>• No reprogramming</p>
 </div>
 
 <div class="card">
 <h2>Scoring</h2>
 <p>• Fastest time wins</p>
-<p>• Incomplete runs ranked after completed runs</p>
 </div>
 
 <div class="card">
 <h2>Common Rules</h2>
-<p>• Team size: 4 members</p>
-<p>• Only leader communicates with judge</p>
-<p>• No external power allowed</p>
-<p>• Judge decision is final</p>
+<p>• Team size: 4</p>
+<p>• Judge decision final</p>
 </div>
-
-<a href="robotics.html">⬅ Back</a>
 
 </div>
 
 <script>
 document.querySelectorAll("a").forEach(link => {
-    if (link.href && !link.target) {
-        link.addEventListener("click", function(e) {
-            e.preventDefault();
-            document.body.classList.add("fade-out");
-            setTimeout(() => {
-                window.location = this.href;
-            }, 300);
-        });
-    }
-});
-</script>
-
-<script>
-const glow = document.createElement("div");
-glow.classList.add("cursor-glow");
-document.body.appendChild(glow);
-
-document.addEventListener("mousemove", e => {
-    glow.style.left = e.clientX + "px";
-    glow.style.top = e.clientY + "px";
+    link.addEventListener("click", function(e) {
+        e.preventDefault();
+        document.body.style.opacity = 0;
+        setTimeout(() => window.location = this.href, 300);
+    });
 });
 </script>
 
