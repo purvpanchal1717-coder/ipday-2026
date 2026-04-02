@@ -331,12 +331,32 @@ h1 {
 
 /* MOBILE */
 @media (max-width:768px){
-    h1 { font-size:32px; }
-    .info { margin-top:-80px; }
-    .grid { flex-direction:column; align-items:center; }
-    .card { width:95%; }
-    .section-bg::before { top:-70px; height:100px; }
-    .navbar { justify-content:flex-start; }
+
+    /* Navbar */
+    .navbar { padding:7px 10px; gap:6px; }
+    .navbar .nav-logo img { height:34px; max-width:100px; padding:2px; }
+    .navbar .nav-title { font-size:13px; letter-spacing:0; }
+
+    /* Hero — remove giant black gap at bottom */
+    .hero { padding:90px 16px 120px; }
+    .hero::after { height:100px; }
+
+    /* Heading */
+    h1 { font-size:30px; margin-bottom:8px; }
+
+    /* Prize pool — one line */
+    .prize-inline { font-size:20px; margin-top:18px; white-space:nowrap; }
+
+    /* Button */
+    .btn { width:80%; max-width:280px; }
+
+    /* Info cards */
+    .info { margin-top:-60px; padding:20px 12px; gap:12px; }
+    .info-box { padding:18px; }
+
+    /* Event grid */
+    .grid { flex-direction:column; align-items:center; padding:50px 16px; }
+    .card { width:92%; max-width:340px; }
 }
 
 </style>
@@ -348,7 +368,8 @@ h1 {
 <nav class="navbar">
     <!-- LEFT: PI Lab logo -->
     <div class="nav-logo left">
-        <img src="pi lab logo.jpg" alt="Project & Innovation Lab">
+        <img src="pi_lab_logo.jpg" alt="Project & Innovation Lab"
+             onerror="this.style.display='none'">
     </div>
 
     <!-- CENTER: Event title -->
@@ -356,7 +377,8 @@ h1 {
 
     <!-- RIGHT: Government Polytechnic logo -->
     <div class="nav-logo right">
-        <img src="gp logo.jpg" alt="Government Polytechnic Ahmedabad">
+        <img src="gp_logo.jpg" alt="Government Polytechnic Ahmedabad"
+             onerror="this.style.display='none'">
     </div>
 </nav>
 
