@@ -30,7 +30,7 @@ body::before {
     z-index:0;
 }
 
-/* ── NAVBAR / LOGO ── */
+/* ── NAVBAR ── */
 .navbar {
     position:fixed;
     top:0;
@@ -39,36 +39,48 @@ body::before {
     z-index:100;
     display:flex;
     align-items:center;
-    justify-content:center;
-    padding:12px 30px;
-    background:rgba(0,0,0,0.55);
-    backdrop-filter:blur(12px);
+    justify-content:space-between;
+    padding:10px 20px;
+    background:rgba(0,0,0,0.60);
+    backdrop-filter:blur(14px);
     border-bottom:1px solid #00f0ff22;
 }
 
-.navbar .logo-wrap {
+.navbar .nav-logo {
     display:flex;
     align-items:center;
-    gap:12px;
-    text-decoration:none;
+    flex:1;
 }
 
-/* ── swap this <img> src with your real logo file ── */
-.navbar .logo-img {
-    width:42px;
-    height:42px;
+.navbar .nav-logo.right {
+    justify-content:flex-end;
+}
+
+.navbar .nav-logo img {
+    height:44px;
+    width:auto;
+    max-width:140px;
     object-fit:contain;
-    border-radius:8px;
-    /* placeholder gradient shown when no image loads */
-    background:linear-gradient(135deg,#00f0ff,#00ffa6);
+    border-radius:6px;
+    background:#fff;
+    padding:3px;
 }
 
-.navbar .logo-text {
-    font-size:20px;
+.navbar .nav-title {
+    flex:1;
+    text-align:center;
+    font-size:18px;
     font-weight:700;
     color:#00f0ff;
     text-shadow:0 0 10px #00f0ff88;
     letter-spacing:1px;
+    white-space:nowrap;
+}
+
+@media (max-width:600px){
+    .navbar { padding:8px 10px; }
+    .navbar .nav-logo img { height:32px; max-width:90px; }
+    .navbar .nav-title { font-size:12px; letter-spacing:0; }
 }
 
 /* HERO */
@@ -332,17 +344,20 @@ h1 {
 
 <body>
 
-<!-- ── NAVBAR WITH LOGO ── -->
+<!-- ── NAVBAR ── -->
 <nav class="navbar">
-    <a href="index.html" class="logo-wrap">
-        <!--
-            Replace the src below with your actual logo file, e.g. src="logo.png"
-            The gradient background acts as a fallback if no image is found.
-        -->
-        <img class="logo-img" src="logo.png" alt="IP Day Logo"
-             onerror="this.style.display='none'; this.nextElementSibling.style.fontSize='28px'">
-        <span class="logo-text">IP Day 2026</span>
-    </a>
+    <!-- LEFT: PI Lab logo -->
+    <div class="nav-logo left">
+        <img src="pi_lab_logo.jpg" alt="Project & Innovation Lab">
+    </div>
+
+    <!-- CENTER: Event title -->
+    <div class="nav-title">🔥 IP Day 2026</div>
+
+    <!-- RIGHT: Government Polytechnic logo -->
+    <div class="nav-logo right">
+        <img src="gp_logo.jpg" alt="Government Polytechnic Ahmedabad">
+    </div>
 </nav>
 
 <!-- ── HERO ── -->
