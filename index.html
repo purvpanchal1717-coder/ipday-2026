@@ -206,23 +206,36 @@ h1 {
 .section-bg {
     position:relative;
     background:
-        linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.9)),
         url('https://images.unsplash.com/photo-1511512578047-dfb367046420') center/cover no-repeat;
     background-attachment:scroll;
 }
 
+/* Dark overlay on the image itself */
 .section-bg::before {
     content:"";
     position:absolute;
-    top:-100px;
-    left:0;
-    width:100%;
-    height:120px;
-    background:linear-gradient(to bottom, #000, transparent);
+    inset:0;
+    background:rgba(0,0,0,0.62);
     z-index:1;
 }
 
-.section-bg > * { position:relative; z-index:2; }
+/* Smooth top AND bottom fade to black */
+.section-bg::after {
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+        linear-gradient(to bottom,
+            #000 0%,
+            transparent 18%,
+            transparent 82%,
+            #000 100%
+        );
+    z-index:2;
+    pointer-events:none;
+}
+
+.section-bg > * { position:relative; z-index:3; }
 
 /* EVENT CARDS */
 .grid {
