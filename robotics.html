@@ -1,141 +1,238 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Robotics - IP Day</title>
+<title>Robotics Events – IP Day 2026</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 <style>
 
-/* GLOBAL FIX */
-* { box-sizing: border-box; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 html, body {
-    margin:0;
-    overflow-x:hidden;
+    overflow-x: hidden;
+    width: 100%;
 }
 
-/* BODY */
 body {
-    font-family:'Segoe UI', sans-serif;
-    color:white;
-    text-align:center;
-
+    font-family: 'Poppins', sans-serif;
+    color: #fff;
+    text-align: center;
+    min-height: 100vh;
     background:
-    linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.95)),
-    url('bck.jpg') center/cover no-repeat;
+        linear-gradient(rgba(0,0,0,0.82), rgba(0,0,0,0.96)),
+        url('bck.jpg') center / cover no-repeat;
+    opacity: 1;
+    transition: opacity 0.3s;
+}
+
+/* GLOW */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle at 50% 30%, #00f0ff14, transparent 65%);
+    pointer-events: none;
+    z-index: 0;
 }
 
 /* BACK BUTTON */
 .back-btn {
-    position:fixed;
-    top:20px;
-    left:20px;
-    background:#00f0ff;
-    color:black;
-    padding:10px 15px;
-    border-radius:8px;
-    text-decoration:none;
-    font-weight:bold;
-    box-shadow:0 0 10px #00f0ff;
-    z-index:1000;
+    position: fixed;
+    top: 18px;
+    left: 18px;
+    background: #00f0ff;
+    color: #000;
+    padding: 9px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 14px;
+    box-shadow: 0 0 12px #00f0ff88;
+    z-index: 1000;
+    transition: 0.3s;
+}
+
+.back-btn:hover {
+    background: #000;
+    color: #00f0ff;
+    border: 1px solid #00f0ff;
 }
 
 /* CONTAINER */
 .container {
-    padding:80px 15px;
+    position: relative;
+    z-index: 1;
+    padding: 90px 16px 60px;
+    max-width: 620px;
+    margin: 0 auto;
 }
 
-/* CARDS */
-.card {
-    background:rgba(0,0,0,0.6);
-    padding:20px;
-    margin:20px auto;
-    width:100%;
-    max-width:500px;
-    border-radius:12px;
-    border:1px solid #00f0ff33;
-    transition:0.3s;
+/* PAGE TITLE */
+.page-title {
+    font-size: 36px;
+    font-weight: 700;
+    color: #00f0ff;
+    text-shadow: 0 0 20px #00f0ff;
+    margin-bottom: 10px;
 }
 
-.card:hover {
-    transform:translateY(-8px);
-    box-shadow:0 0 20px #00f0ff;
+.page-sub {
+    color: #aaa;
+    font-size: 14px;
+    margin-bottom: 40px;
 }
 
-/* HEADINGS */
-h1 {
-    color:#00f0ff;
-    margin-bottom:30px;
+/* EVENT CARDS */
+.event-card {
+    background: rgba(0,0,0,0.80);
+    border: 1px solid rgba(0,240,255,0.3);
+    border-radius: 18px;
+    padding: 28px 24px;
+    margin: 0 0 24px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 24px rgba(0,0,0,0.6);
+    transition: 0.35s;
+    text-decoration: none;
+    display: block;
+    cursor: pointer;
 }
 
-h2 {
-    color:#00f0ff;
+.event-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 0 28px #00f0ff, 0 0 60px #00f0ff44;
+    border-color: #00f0ff;
+}
+
+.event-icon {
+    font-size: 44px;
+    margin-bottom: 12px;
+    display: block;
+}
+
+.event-card h2 {
+    color: #00f0ff;
+    font-size: 22px;
+    text-shadow: 0 0 10px #00f0ff88;
+    margin-bottom: 8px;
+}
+
+.event-card p {
+    color: #ccc;
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 16px;
+}
+
+/* TAGS ROW */
+.tags {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 18px;
+}
+
+.tag {
+    background: rgba(0,240,255,0.1);
+    border: 1px solid #00f0ff44;
+    color: #00f0ff;
+    font-size: 11px;
+    padding: 4px 12px;
+    border-radius: 20px;
+}
+
+/* CTA ROW */
+.card-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(90deg, #00f0ff22, #00ffa622);
+    border: 1px solid #00f0ff66;
+    color: #00f0ff;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 8px 20px;
+    border-radius: 30px;
+    transition: 0.3s;
+}
+
+.event-card:hover .card-cta {
+    background: #00f0ff;
+    color: #000;
+    box-shadow: 0 0 15px #00f0ff;
+}
+
+/* COMING SOON BADGE */
+.badge-soon {
+    display: inline-block;
+    background: rgba(255,160,0,0.15);
+    border: 1px solid #ffa04488;
+    color: #ffa044;
+    font-size: 11px;
+    padding: 3px 12px;
+    border-radius: 20px;
+    margin-left: 8px;
+    vertical-align: middle;
 }
 
 /* MOBILE */
-@media (max-width:768px){
-
-    .container {
-        padding:60px 10px;
-    }
-
-    .card {
-        width:100%;
-        max-width:95%;
-        margin:15px auto;
-        padding:18px;
-    }
-
-    h1 { font-size:26px; }
-    h2 { font-size:18px; }
-    p { font-size:14px; }
-
-    .back-btn {
-        top:10px;
-        left:10px;
-        padding:8px 12px;
-        font-size:12px;
-    }
+@media (max-width: 600px) {
+    .page-title { font-size: 26px; }
+    .event-card { padding: 22px 16px; }
+    .event-card h2 { font-size: 19px; }
+    .back-btn { top: 12px; left: 12px; padding: 7px 12px; font-size: 12px; }
 }
 
 </style>
 </head>
-
 <body>
 
 <a href="index.html" class="back-btn">⬅ Back</a>
 
 <div class="container">
 
-<h1>🤖 Robotics Events</h1>
+    <div class="page-title">🤖 Robotics Events</div>
+    <p class="page-sub">Choose an event below to view detailed rules & guidelines</p>
 
-<a href="linefollower.html">
-    <div class="card">
-        <h2>Line Follower</h2>
-        <p>Click to view full rules</p>
-    </div>
-</a>
+    <!-- LINE FOLLOWER → opens PDF directly -->
+    <a href="Line_Following_detailed.pdf" target="_blank" class="event-card">
+        <span class="event-icon">〰️</span>
+        <h2>Line Following Robot</h2>
+        <p>Autonomous robot navigates a black winding line across a 3m×5m field with S-curves, speed bumps, line gaps, 90° turns and cross junctions.</p>
+        <div class="tags">
+            <span class="tag">Autonomous</span>
+            <span class="tag">18×20×25 cm max</span>
+            <span class="tag">IR / Camera sensors</span>
+            <span class="tag">No remote control</span>
+        </div>
+        <span class="card-cta">📄 View Rules PDF</span>
+    </a>
 
-<a href="roborace.html">
-    <div class="card">
-        <h2>Robo Race</h2>
-        <p>Click to view full rules</p>
-    </div>
-</a>
+    <!-- ROBO RACE → opens roborace.html (swap to PDF later) -->
+    <a href="roborace.html" class="event-card">
+        <span class="event-icon">🏎️</span>
+        <h2>Robo Race <span class="badge-soon">PDF coming soon</span></h2>
+        <p>Remote-controlled robot races through a curved obstacle track with ramps and speed breakers. Fastest time wins.</p>
+        <div class="tags">
+            <span class="tag">Remote Controlled</span>
+            <span class="tag">30×30×40 cm max</span>
+            <span class="tag">Max 3 kg</span>
+            <span class="tag">Max 12V DC</span>
+        </div>
+        <span class="card-cta">📋 View Rules</span>
+    </a>
 
 </div>
 
 <script>
+// Smooth fade out on navigation (skip PDF links — they open in new tab)
 document.querySelectorAll("a").forEach(link => {
-    if (link.href && !link.target) {
-        link.addEventListener("click", function(e) {
-            e.preventDefault();
-            document.body.style.opacity = 0;
-            setTimeout(() => {
-                window.location = this.href;
-            }, 300);
-        });
-    }
+    if (link.target === "_blank") return;
+    link.addEventListener("click", function(e) {
+        e.preventDefault();
+        document.body.style.opacity = 0;
+        setTimeout(() => window.location = this.href, 280);
+    });
 });
 </script>
 
