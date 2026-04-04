@@ -294,6 +294,54 @@ body::before {
     margin-top: 12px;
 }
 
+.prize-list {
+    margin: 14px 0 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.prize-item {
+    border-radius: 10px;
+    padding: 8px 14px;
+    font-size: 13px;
+    font-weight: 700;
+    text-align: left;
+    letter-spacing: 0.3px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s;
+}
+
+.prize-item:hover { transform: scale(1.03); }
+
+/* GOLD */
+.prize-item.gold {
+    background: linear-gradient(90deg, rgba(255,200,0,0.18), rgba(255,200,0,0.05));
+    border: 1px solid rgba(255,200,0,0.5);
+    color: #ffd700;
+    text-shadow: 0 0 8px rgba(255,210,0,0.6);
+    box-shadow: 0 0 10px rgba(255,200,0,0.15);
+}
+
+/* SILVER */
+.prize-item.silver {
+    background: linear-gradient(90deg, rgba(192,192,192,0.18), rgba(192,192,192,0.05));
+    border: 1px solid rgba(192,192,192,0.4);
+    color: #d0d0d0;
+    text-shadow: 0 0 8px rgba(200,200,200,0.4);
+    box-shadow: 0 0 10px rgba(192,192,192,0.1);
+}
+
+/* BRONZE */
+.prize-item.bronze {
+    background: linear-gradient(90deg, rgba(205,127,50,0.18), rgba(205,127,50,0.05));
+    border: 1px solid rgba(205,127,50,0.4);
+    color: #cd7f32;
+    text-shadow: 0 0 8px rgba(205,127,50,0.4);
+    box-shadow: 0 0 10px rgba(205,127,50,0.1);
+}
+
 .card-hint {
     color: #00f0ff99;
     font-size: 12px;
@@ -451,6 +499,11 @@ body::before {
                 <img src="https://akm-img-a-in.tosshub.com/sites/dailyo//resources/202309/blob010923020816.png"
                      alt="Free Fire Tournament">
                 <h3>🎮 Free Fire Tournament</h3>
+                <div class="prize-list">
+                    <div class="prize-item gold">🥇 1st &nbsp;— ₹5,000</div>
+                    <div class="prize-item silver">🥈 2nd — ₹2,800</div>
+                    <div class="prize-item bronze">🥉 3rd &nbsp;— ₹1,000</div>
+                </div>
                 <p class="card-hint">👆 Tap for rules & info</p>
             </div>
         </a>
@@ -458,6 +511,9 @@ body::before {
             <div class="card">
                 <img src="robotics.jpg" alt="Robotics Events">
                 <h3>🤖 Robotics Events</h3>
+                <div class="prize-list">
+                    <div class="prize-item gold">🥇 1st &nbsp;— ₹8,000</div>
+                </div>
                 <p class="card-hint">👆 Tap for rules & info</p>
             </div>
         </a>
