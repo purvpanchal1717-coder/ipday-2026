@@ -260,9 +260,13 @@ body::before {
     gap: 24px;
     flex-wrap: wrap;
     padding: 80px 20px;
+    align-items: stretch;
 }
 
-.grid a { text-decoration: none; }
+.grid a {
+    text-decoration: none;
+    display: flex;
+}
 
 .card {
     width: 280px;
@@ -273,6 +277,22 @@ body::before {
     box-shadow: 0 4px 20px rgba(0,0,0,0.7);
     backdrop-filter: blur(10px);
     transition: 0.3s;
+    display: flex;
+    flex-direction: column;
+}
+
+/* prize list pushes hint to bottom */
+.prize-list {
+    flex: 1;
+    margin: 14px 0 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    justify-content: flex-start;
+}
+
+.card-hint {
+    margin-top: auto;
 }
 
 .card:hover {
@@ -294,12 +314,7 @@ body::before {
     margin-top: 12px;
 }
 
-.prize-list {
-    margin: 14px 0 10px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
+/* card hint */
 
 .prize-item {
     border-radius: 10px;
