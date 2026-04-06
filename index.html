@@ -1,560 +1,1084 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>IP Day 2026</title>
+<title>IP Day 2026 — Robotics Competition</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 
+/* ── CSS VARIABLES ── */
+:root {
+    --navy:      #0a1f6e;
+    --blue:      #2563eb;
+    --blue-lt:   #eff6ff;
+    --blue-mid:  #dbeafe;
+    --accent:    #1d4ed8;
+    --text:      #1e293b;
+    --text-sm:   #475569;
+    --white:     #ffffff;
+    --offwhite:  #f4f7ff;
+    --border:    #e2e8f0;
+    --shadow:    0 4px 24px rgba(37,99,235,0.08);
+    --shadow-hv: 0 8px 40px rgba(37,99,235,0.18);
+    --radius:    14px;
+    --font:      'Manrope', sans-serif;
+}
+
 /* ── RESET ── */
-*, *::before, *::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-html {
-    overflow-x: hidden;
-    width: 100%;
-}
-
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { overflow-x: hidden; scroll-behavior: smooth; }
 body {
-    font-family: 'Poppins', sans-serif;
-    background: #000;
-    color: #fff;
-    text-align: center;
+    font-family: var(--font);
+    font-size: 15px;
+    color: var(--text);
+    background: var(--white);
     overflow-x: hidden;
-    position: relative;
-    width: 100%;
+    line-height: 1.7;
 }
 
-body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    background: radial-gradient(circle at 50% 40%, #00f0ff18, transparent 65%);
-    pointer-events: none;
-    z-index: 0;
+/* ── SCROLL ANIMATION ── */
+.reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.visible {
+    opacity: 1;
+    transform: none;
 }
 
-/* ══ NAVBAR ══ */
+/* ══════════════════════════════
+   NAVBAR
+══════════════════════════════ */
 .navbar {
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
+    top: 0; left: 0; right: 0;
     z-index: 100;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 8px 16px;
-    background: rgba(0,0,0,0.65);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    border-bottom: 1px solid rgba(0,240,255,0.15);
-    gap: 8px;
-}
-
-.nav-logo {
-    display: flex;
-    align-items: center;
-    flex: 0 0 auto;
+    padding: 10px 32px;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 2px 16px rgba(0,0,0,0.06);
 }
 
 .nav-logo img {
-    height: 40px;
+    height: 42px;
     width: auto;
-    max-width: 130px;
+    max-width: 140px;
     object-fit: contain;
-    border-radius: 6px;
-    background: #fff;
-    padding: 3px;
     display: block;
 }
 
 .nav-title {
-    flex: 1;
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--navy);
+    letter-spacing: 0.3px;
     text-align: center;
-    font-size: 17px;
-    font-weight: 700;
-    color: #00f0ff;
-    text-shadow: 0 0 10px #00f0ff99;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    padding: 0 8px;
+    flex: 1;
+    padding: 0 16px;
 }
 
-/* ══ HERO ══ */
+/* ══════════════════════════════
+   HERO
+══════════════════════════════ */
 .hero {
-    padding: 150px 20px 200px;
-    background: url('https://images.unsplash.com/photo-1542751371-adc38448a05e')
-                center / cover no-repeat;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 120px 20px 80px;
+    background:
+        radial-gradient(ellipse at 20% 50%, #dbeafe55 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 20%, #eff6ff 0%, transparent 55%),
+        var(--white);
     position: relative;
-    z-index: 1;
+    overflow: hidden;
 }
 
+/* geometric blueprint lines */
 .hero::before {
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.25), rgba(0,0,0,0.82));
+    background-image:
+        linear-gradient(var(--blue-mid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--blue-mid) 1px, transparent 1px);
+    background-size: 60px 60px;
+    opacity: 0.25;
+    pointer-events: none;
 }
 
+/* big circle accent */
 .hero::after {
     content: "";
     position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 180px;
-    background: linear-gradient(to bottom, transparent, #000);
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    border: 2px solid var(--blue-mid);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    opacity: 0.4;
 }
 
-.hero-content {
-    position: relative;
-    z-index: 2;
+.hero-content { position: relative; z-index: 2; max-width: 760px; }
+
+.hero-pill {
+    display: inline-block;
+    background: var(--blue-lt);
+    border: 1px solid var(--blue-mid);
+    color: var(--blue);
+    font-size: 13px;
+    font-weight: 700;
+    padding: 6px 18px;
+    border-radius: 30px;
+    margin-bottom: 24px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
 }
 
 .hero h1 {
-    color: #00f0ff;
-    font-size: 52px;
-    text-shadow: 0 0 25px #00f0ff;
-    line-height: 1.2;
+    font-size: clamp(36px, 6vw, 68px);
+    font-weight: 800;
+    color: var(--navy);
+    line-height: 1.1;
+    margin-bottom: 12px;
+    letter-spacing: -1px;
 }
 
-.hero p {
-    font-size: 18px;
-    margin-top: 10px;
-    color: #eee;
-}
-
-#countdown {
-    margin-top: 14px;
-    font-size: 17px;
-    color: #ccc;
-}
-
-.btn {
-    display: inline-block;
-    margin-top: 22px;
-    padding: 13px 32px;
-    border: 2px solid #00f0ff;
-    color: #00f0ff;
-    background: transparent;
-    border-radius: 10px;
-    box-shadow: 0 0 15px #00f0ff55;
-    transition: 0.3s;
-    cursor: pointer;
-    font-family: 'Poppins', sans-serif;
-    font-size: 16px;
-    font-weight: 600;
-}
-
-.btn:hover {
-    background: #00f0ff;
-    color: #000;
-    transform: scale(1.08);
-    box-shadow: 0 0 30px #00f0ff;
-}
-
-.prize-inline {
-    margin-top: 26px;
-    font-size: 28px;
-    font-weight: 700;
-    background: linear-gradient(90deg, #00f0ff, #00ffa6);
+.hero h1 span {
+    background: linear-gradient(135deg, var(--blue), #60a5fa);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
-/* ══ INFO CARDS ══ */
-.info {
+.hero-sub {
+    font-size: 15px;
+    color: var(--text-sm);
+    margin-bottom: 36px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+/* COUNTDOWN */
+.countdown {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    margin-bottom: 36px;
+    flex-wrap: wrap;
+}
+
+.cd-box {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 20px;
+    min-width: 80px;
+    box-shadow: var(--shadow);
+}
+
+.cd-num {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--navy);
+    line-height: 1;
+    display: block;
+}
+
+.cd-label {
+    font-size: 11px;
+    color: var(--text-sm);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 4px;
+    display: block;
+}
+
+/* HERO BUTTONS */
+.hero-btns {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+}
+
+.btn-primary {
+    padding: 13px 32px;
+    background: var(--blue);
+    color: var(--white);
+    border: 2px solid var(--blue);
+    border-radius: 10px;
+    font-family: var(--font);
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-primary:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(37,99,235,0.3);
+}
+
+.btn-outline {
+    padding: 13px 32px;
+    background: transparent;
+    color: var(--blue);
+    border: 2px solid var(--blue-mid);
+    border-radius: 10px;
+    font-family: var(--font);
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-outline:hover {
+    background: var(--blue-lt);
+    border-color: var(--blue);
+    transform: translateY(-2px);
+}
+
+.hero-prize {
+    font-size: 15px;
+    color: var(--text-sm);
+    font-weight: 600;
+}
+
+.hero-prize strong {
+    color: var(--navy);
+    font-weight: 800;
+}
+
+/* ══════════════════════════════
+   SECTION COMMON
+══════════════════════════════ */
+section { padding: 90px 20px; }
+section.alt { background: var(--offwhite); }
+
+.section-pill {
+    display: inline-block;
+    background: var(--blue-lt);
+    border: 1px solid var(--blue-mid);
+    color: var(--blue);
+    font-size: 12px;
+    font-weight: 700;
+    padding: 5px 16px;
+    border-radius: 30px;
+    margin-bottom: 14px;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+}
+
+.section-title {
+    font-size: clamp(24px, 3.5vw, 36px);
+    font-weight: 800;
+    color: var(--navy);
+    margin-bottom: 8px;
+    letter-spacing: -0.5px;
+}
+
+.section-title::after {
+    content: "";
+    display: block;
+    width: 48px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--blue), #60a5fa);
+    border-radius: 2px;
+    margin: 10px auto 0;
+}
+
+.section-center { text-align: center; }
+
+/* ══════════════════════════════
+   INFO STRIP
+══════════════════════════════ */
+.info-strip {
+    background: var(--offwhite);
+    padding: 40px 20px;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+}
+
+.info-grid {
     display: flex;
     justify-content: center;
     gap: 20px;
     flex-wrap: wrap;
-    margin-top: -110px;
-    padding: 40px 16px;
-    position: relative;
-    z-index: 5;
+    max-width: 900px;
+    margin: 0 auto;
 }
 
-.info-box {
-    width: 300px;
-    background: rgba(0,0,0,0.88);
-    padding: 24px 20px;
-    border-radius: 18px;
-    border: 1px solid rgba(0,240,255,0.35);
-    box-shadow: 0 0 12px #00f0ff22, 0 0 30px #00f0ff11;
-    backdrop-filter: blur(8px);
-    transition: 0.4s;
+.info-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px 28px;
+    flex: 1;
+    min-width: 220px;
+    max-width: 280px;
+    box-shadow: var(--shadow);
+    transition: 0.3s;
+    text-align: center;
 }
 
-.info-box:hover {
-    transform: translateY(-10px) scale(1.02);
-    box-shadow: 0 0 25px #00f0ff, 0 0 60px #00f0ff55;
+.info-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-hv);
 }
 
-.info-box h3 {
-    color: #00f0ff;
-    text-shadow: 0 0 10px #00f0ff;
-    margin-bottom: 8px;
-    font-size: 17px;
+.info-icon {
+    font-size: 28px;
+    margin-bottom: 10px;
+    display: block;
 }
 
-.info-box p {
-    color: #fff;
+.info-card h3 {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--blue);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+}
+
+.info-card p {
     font-size: 15px;
-    line-height: 1.5;
+    color: var(--text);
+    font-weight: 600;
 }
 
-.venue-link {
+.maps-link {
     display: inline-block;
-    margin-top: 10px;
-    padding: 6px 16px;
-    border-radius: 20px;
-    border: 1px solid #00f0ff88;
-    color: #00f0ff;
-    text-decoration: none;
+    margin-top: 8px;
     font-size: 13px;
+    color: var(--blue);
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 1px solid var(--blue-mid);
+    transition: 0.2s;
+}
+.maps-link:hover { border-color: var(--blue); }
+
+/* ══════════════════════════════
+   EVENT CARDS
+══════════════════════════════ */
+.events-grid {
+    display: flex;
+    justify-content: center;
+    gap: 28px;
+    flex-wrap: wrap;
+    margin-top: 40px;
+}
+
+.event-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 0;
+    width: 320px;
+    box-shadow: var(--shadow);
+    transition: 0.35s;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border-top: 4px solid var(--blue);
+}
+
+.event-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-hv);
+}
+
+.event-card-img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display: block;
+}
+
+.event-card-body {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.event-card h3 {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--navy);
+    margin-bottom: 6px;
+}
+
+.event-card-desc {
+    font-size: 15px;
+    color: var(--text-sm);
+    margin-bottom: 16px;
+}
+
+/* PRIZE ROWS */
+.prize-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.prize-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.prize-row.gold {
+    background: #fffbeb;
+    border: 1px solid #fde68a;
+    color: #92400e;
+}
+
+.prize-row.silver {
+    background: #f8fafc;
+    border: 1px solid #cbd5e1;
+    color: #475569;
+}
+
+.prize-row.bronze {
+    background: #fff7ed;
+    border: 1px solid #fed7aa;
+    color: #9a3412;
+}
+
+.prize-tbd {
+    font-size: 13px;
+    color: var(--text-sm);
+    font-style: italic;
+}
+
+.event-hint {
+    font-size: 13px;
+    color: var(--text-sm);
+    margin-bottom: 16px;
     font-weight: 500;
+}
+
+/* card bottom actions */
+.event-card-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: auto;
+}
+
+.btn-rules {
+    flex: 1;
+    padding: 10px;
+    background: var(--blue-lt);
+    border: 1px solid var(--blue-mid);
+    border-radius: 8px;
+    color: var(--blue);
+    font-family: var(--font);
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    transition: 0.25s;
+    display: block;
+}
+
+.btn-rules:hover {
+    background: var(--blue-mid);
+}
+
+.btn-register {
+    flex: 1;
+    padding: 10px;
+    background: var(--blue);
+    border: 1px solid var(--blue);
+    border-radius: 8px;
+    color: var(--white);
+    font-family: var(--font);
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    transition: 0.25s;
+    display: block;
+}
+
+.btn-register:hover {
+    background: var(--accent);
+    transform: translateY(-1px);
+}
+
+/* ══════════════════════════════
+   WHY PARTICIPATE
+══════════════════════════════ */
+.why-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 40px;
+    max-width: 860px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.why-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    flex: 1;
+    min-width: 240px;
+    max-width: 380px;
+    box-shadow: var(--shadow);
     transition: 0.3s;
 }
 
-.venue-link:hover {
-    background: #00f0ff;
-    color: #000;
-    box-shadow: 0 0 15px #00f0ff;
+.why-item:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-hv);
+    border-color: var(--blue-mid);
 }
 
-/* ══ SECTION BG ══ */
-.section-bg {
+.why-dot {
+    width: 10px;
+    height: 10px;
+    min-width: 10px;
+    background: var(--blue);
+    border-radius: 50%;
+    margin-top: 6px;
+}
+
+.why-item p { font-size: 15px; color: var(--text); font-weight: 500; }
+
+/* ══════════════════════════════
+   TIMELINE
+══════════════════════════════ */
+.timeline {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 0;
+    margin-top: 50px;
+    flex-wrap: wrap;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.tl-item {
+    flex: 1;
+    min-width: 160px;
+    text-align: center;
     position: relative;
-    background: url('https://images.unsplash.com/photo-1511512578047-dfb367046420')
-                center / cover no-repeat;
+    padding: 0 10px;
 }
 
-.section-bg::before {
+/* connecting line */
+.tl-item:not(:last-child)::after {
     content: "";
     position: absolute;
-    inset: 0;
-    background: rgba(0,0,0,0.62);
+    top: 20px;
+    right: -10px;
+    width: calc(100% - 40px);
+    height: 2px;
+    background: linear-gradient(90deg, var(--blue), var(--blue-mid));
+    left: 50%;
+    transform: none;
+    z-index: 0;
+}
+
+.tl-dot {
+    width: 40px;
+    height: 40px;
+    background: var(--blue);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 14px;
+    color: white;
+    font-size: 16px;
+    position: relative;
     z-index: 1;
+    box-shadow: 0 0 0 6px var(--blue-lt);
 }
 
-.section-bg::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to bottom,
-        #000 0%, transparent 16%,
-        transparent 84%, #000 100%);
-    z-index: 2;
-    pointer-events: none;
+.tl-date {
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--blue);
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
-.section-bg > * { position: relative; z-index: 3; }
+.tl-label {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--navy);
+}
 
-/* ══ EVENT CARDS ══ */
-.grid {
+/* ══════════════════════════════
+   ORGANIZING COMMITTEE
+══════════════════════════════ */
+.committee-grid {
     display: flex;
     justify-content: center;
     gap: 24px;
     flex-wrap: wrap;
-    padding: 80px 20px;
-    align-items: stretch;
+    margin-top: 40px;
 }
 
-.grid a {
-    text-decoration: none;
-    display: flex;
-}
-
-.card {
-    width: 280px;
-    background: rgba(0,0,0,0.82);
-    padding: 14px;
-    border-radius: 16px;
-    border: 1px solid rgba(0,240,255,0.3);
-    box-shadow: 0 4px 20px rgba(0,0,0,0.7);
-    backdrop-filter: blur(10px);
+.person-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px 24px;
+    width: 220px;
+    text-align: center;
+    box-shadow: var(--shadow);
     transition: 0.3s;
+}
+
+.person-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-hv);
+    border-color: var(--blue-mid);
+}
+
+.person-photo {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: var(--blue-lt);
+    border: 3px solid var(--blue-mid);
+    margin: 0 auto 16px;
     display: flex;
-    flex-direction: column;
-}
-
-/* prize list pushes hint to bottom */
-.prize-list {
-    flex: 1;
-    margin: 14px 0 10px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    justify-content: flex-start;
-}
-
-.card-hint {
-    margin-top: auto;
-}
-
-.card:hover {
-    transform: translateY(-10px) scale(1.03);
-    box-shadow: 0 0 22px #00f0ff, 0 0 50px #00f0ff44;
-}
-
-.card img {
-    width: 100%;
-    height: 175px;
-    object-fit: cover;
-    border-radius: 10px;
-    display: block;
-}
-
-.card h3 {
-    color: #fff;
-    font-size: 16px;
-    margin-top: 12px;
-}
-
-/* card hint */
-
-.prize-item {
-    border-radius: 10px;
-    padding: 8px 14px;
-    font-size: 13px;
-    font-weight: 700;
-    text-align: left;
-    letter-spacing: 0.3px;
-    position: relative;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
     overflow: hidden;
-    transition: transform 0.2s;
 }
 
-.prize-item:hover { transform: scale(1.03); }
-
-/* GOLD */
-.prize-item.gold {
-    background: linear-gradient(90deg, rgba(255,200,0,0.18), rgba(255,200,0,0.05));
-    border: 1px solid rgba(255,200,0,0.5);
-    color: #ffd700;
-    text-shadow: 0 0 8px rgba(255,210,0,0.6);
-    box-shadow: 0 0 10px rgba(255,200,0,0.15);
+.person-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
 }
 
-/* SILVER */
-.prize-item.silver {
-    background: linear-gradient(90deg, rgba(192,192,192,0.18), rgba(192,192,192,0.05));
-    border: 1px solid rgba(192,192,192,0.4);
-    color: #d0d0d0;
-    text-shadow: 0 0 8px rgba(200,200,200,0.4);
-    box-shadow: 0 0 10px rgba(192,192,192,0.1);
-}
-
-/* BRONZE */
-.prize-item.bronze {
-    background: linear-gradient(90deg, rgba(205,127,50,0.18), rgba(205,127,50,0.05));
-    border: 1px solid rgba(205,127,50,0.4);
-    color: #cd7f32;
-    text-shadow: 0 0 8px rgba(205,127,50,0.4);
-    box-shadow: 0 0 10px rgba(205,127,50,0.1);
-}
-
-.card-hint {
-    color: #00f0ff99;
-    font-size: 12px;
-    margin-top: 6px;
-    letter-spacing: 0.3px;
-}
-
-/* ══ CTA ══ */
-.cta { padding: 70px 20px; }
-.cta h2 { color: #fff; margin-bottom: 20px; }
-
-.cta-btn {
-    padding: 14px 36px;
-    border-radius: 40px;
-    background: linear-gradient(45deg, #00f0ff, #00ffa6);
-    border: none;
-    font-weight: 700;
-    font-size: 16px;
-    cursor: pointer;
-    transition: 0.3s;
-    font-family: 'Poppins', sans-serif;
-    color: #000;
-}
-
-.cta-btn:hover {
-    transform: scale(1.08);
-    box-shadow: 0 0 30px #00f0ff88;
-}
-
-/* ══ ABOUT ══ */
-.about { padding: 70px 20px; }
-
-.about h2 {
-    color: #00f0ff;
-    text-shadow: 0 0 15px #00f0ff;
-    margin-bottom: 14px;
-}
-
-.about p {
-    color: #ccc;
+.person-name {
     font-size: 15px;
-    max-width: 580px;
-    margin: 0 auto;
-    line-height: 1.8;
+    font-weight: 800;
+    color: var(--navy);
+    margin-bottom: 4px;
 }
 
-/* ══ MOBILE ══ */
+.person-role {
+    font-size: 15px;
+    color: var(--text-sm);
+    font-weight: 500;
+}
+
+/* ══════════════════════════════
+   FOOTER
+══════════════════════════════ */
+footer {
+    background: var(--navy);
+    color: #e2e8f0;
+    padding: 70px 20px 30px;
+}
+
+.footer-grid {
+    display: flex;
+    gap: 60px;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 900px;
+    margin: 0 auto 50px;
+}
+
+.footer-col h4 {
+    font-size: 15px;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.footer-col p {
+    font-size: 15px;
+    color: #94a3b8;
+    line-height: 1.8;
+    max-width: 340px;
+}
+
+.footer-contact {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+    color: #94a3b8;
+}
+
+.contact-item span:first-child { font-size: 16px; }
+
+.footer-bottom {
+    border-top: 1px solid #1e3a7a;
+    padding-top: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.footer-logos {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.footer-logos img {
+    height: 36px;
+    width: auto;
+    object-fit: contain;
+    background: #fff;
+    border-radius: 6px;
+    padding: 3px 6px;
+}
+
+.footer-copy {
+    font-size: 13px;
+    color: #475569;
+    text-align: center;
+}
+
+/* ══════════════════════════════
+   MOBILE
+══════════════════════════════ */
 @media (max-width: 768px) {
 
-    .navbar {
-        padding: 7px 10px;
-        gap: 4px;
-    }
-    .nav-logo img {
-        height: 30px;
-        max-width: 85px;
-    }
-    .nav-title {
-        font-size: 12px;
-        padding: 0 4px;
-    }
+    .navbar { padding: 8px 14px; }
+    .nav-logo img { height: 32px; max-width: 90px; }
+    .nav-title { font-size: 13px; }
 
-    .hero {
-        padding: 95px 16px 130px;
-    }
-    .hero::after { height: 100px; }
-    .hero h1 { font-size: 28px; }
-    .hero p  { font-size: 14px; }
-    #countdown { font-size: 14px; }
+    .hero { padding: 100px 16px 60px; min-height: auto; }
+    .hero::after { width: 300px; height: 300px; }
 
-    .prize-inline {
-        font-size: 20px;
-    }
+    .countdown { gap: 10px; }
+    .cd-box { padding: 10px 14px; min-width: 65px; }
+    .cd-num { font-size: 22px; }
 
-    .btn {
-        padding: 11px 26px;
-        font-size: 15px;
-    }
+    .hero-btns { flex-direction: column; align-items: center; }
+    .btn-primary, .btn-outline { width: 100%; max-width: 280px; text-align: center; }
 
-    .info {
-        margin-top: -70px;
-        padding: 16px 12px;
-        gap: 12px;
-    }
-    .info-box {
-        width: 100%;
-        max-width: 100%;
-        padding: 18px 14px;
-    }
+    section { padding: 60px 16px; }
 
-    .grid {
-        flex-direction: column;
-        align-items: center;
-        padding: 48px 12px;
-        gap: 16px;
-    }
-    .card {
-        width: 100%;
-        max-width: 100%;
-    }
+    .info-card { min-width: 100%; max-width: 100%; }
+
+    .event-card { width: 100%; max-width: 380px; }
+
+    .events-grid { flex-direction: column; align-items: center; }
+
+    .timeline { flex-direction: column; align-items: center; gap: 30px; }
+    .tl-item:not(:last-child)::after { display: none; }
+
+    .person-card { width: 160px; padding: 20px 16px; }
+    .person-photo { width: 70px; height: 70px; font-size: 26px; }
+
+    .footer-grid { gap: 36px; }
+    .footer-bottom { flex-direction: column; align-items: center; text-align: center; }
+
+    .event-card-actions { flex-direction: column; }
 }
 
 </style>
 </head>
 <body>
 
-<!-- NAVBAR -->
+<!-- ══ NAVBAR ══ -->
 <nav class="navbar">
     <div class="nav-logo">
-        <img src="pi_lab_logo.jpg" alt="PI Lab"
-             onerror="this.style.display='none'">
+        <img src="pi_lab_logo.jpg" alt="PI Lab" onerror="this.style.display='none'">
     </div>
-    <div class="nav-title">🔥 IP Day 2026</div>
+    <div class="nav-title">IP Day 2026</div>
     <div class="nav-logo">
-        <img src="gp_logo.jpg" alt="GP Ahmedabad"
-             onerror="this.style.display='none'">
+        <img src="gp_logo.jpg" alt="GP Ahmedabad" onerror="this.style.display='none'">
     </div>
 </nav>
 
-<!-- HERO -->
-<div class="hero">
-    <div class="hero-content">
-        <h1>🔥 IP Day 2026 🔥</h1>
-        <p>Innovation • Esports • Technology</p>
-        <div id="countdown"></div>
-        <button class="btn">🚀 Register Now</button>
-        <div class="prize-inline">💰 Prize Pool: ₹75,000+</div>
+<!-- ══ HERO ══ -->
+<section class="hero">
+    <div class="hero-content reveal">
+        <div class="hero-pill">IP Day 2026 · Government Polytechnic Ahmedabad</div>
+        <h1>Robotics<br><span>Competition</span></h1>
+        <p class="hero-sub">Line Following Robot &nbsp;·&nbsp; Robo Race &nbsp;·&nbsp; 30 April – 1 May 2026</p>
+
+        <div class="countdown">
+            <div class="cd-box"><span class="cd-num" id="cd-days">--</span><span class="cd-label">Days</span></div>
+            <div class="cd-box"><span class="cd-num" id="cd-hrs">--</span><span class="cd-label">Hours</span></div>
+            <div class="cd-box"><span class="cd-num" id="cd-min">--</span><span class="cd-label">Mins</span></div>
+            <div class="cd-box"><span class="cd-num" id="cd-sec">--</span><span class="cd-label">Secs</span></div>
+        </div>
+
+        <div class="hero-btns">
+            <a href="#events" class="btn-primary">🤖 View Events</a>
+            <a href="#" class="btn-outline">Register Now →</a>
+        </div>
+
+        <p class="hero-prize">🏆 Prize Pool: <strong>To Be Announced</strong></p>
+    </div>
+</section>
+
+<!-- ══ INFO STRIP ══ -->
+<div class="info-strip">
+    <div class="info-grid">
+        <div class="info-card reveal">
+            <span class="info-icon">📅</span>
+            <h3>Date</h3>
+            <p>30 April – 1 May 2026</p>
+        </div>
+        <div class="info-card reveal">
+            <span class="info-icon">📍</span>
+            <h3>Venue</h3>
+            <p>Government Polytechnic Ahmedabad</p>
+            <a class="maps-link" href="https://maps.google.com/?q=Government+Polytechnic+Ahmedabad" target="_blank" rel="noopener">🗺️ View on Maps</a>
+        </div>
+        <div class="info-card reveal">
+            <span class="info-icon">💰</span>
+            <h3>Registration Fee</h3>
+            <p>₹400 per team</p>
+        </div>
     </div>
 </div>
 
-<!-- INFO CARDS -->
-<div class="info">
-    <div class="info-box">
-        <h3>📅 Date</h3>
-        <p>30th April – 1st May 2026</p>
+<!-- ══ EVENTS ══ -->
+<section id="events" class="section-center">
+    <div class="reveal">
+        <span class="section-pill">Our Events</span>
+        <h2 class="section-title">Choose Your Challenge</h2>
     </div>
-    <div class="info-box">
-        <h3>📍 Venue</h3>
-        <p>Government Polytechnic Ahmedabad</p>
-        <a class="venue-link"
-           href="https://maps.google.com/?q=Government+Polytechnic+Ahmedabad"
-           target="_blank" rel="noopener">🗺️ View on Maps</a>
-    </div>
-    <div class="info-box">
-        <h3>👨‍💼 Organizer</h3>
-        <p>Project & Innovation Lab</p>
-    </div>
-</div>
 
-<!-- EVENTS + CTA + ABOUT -->
-<div class="section-bg">
-    <div class="grid">
-        <a href="Guideline_of_free_fire_v2.pdf" target="_blank">
-            <div class="card">
-                <img src="https://akm-img-a-in.tosshub.com/sites/dailyo//resources/202309/blob010923020816.png"
-                     alt="Free Fire Tournament">
-                <h3>🎮 Free Fire Tournament</h3>
+    <div class="events-grid">
+
+        <!-- LINE FOLLOWER -->
+        <div class="event-card reveal">
+            <img class="event-card-img"
+                 src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&q=80"
+                 alt="Line Following Robot">
+            <div class="event-card-body">
+                <h3>〰️ Line Following Robot</h3>
+                <p class="event-card-desc">Fully autonomous robot navigates a black winding line across a 3m×5m field with S-curves, speed bumps, line gaps and 90° turns.</p>
                 <div class="prize-list">
-                    <div class="prize-item gold">🥇 1st &nbsp;— ₹5,000</div>
-                    <div class="prize-item silver">🥈 2nd — ₹2,800</div>
-                    <div class="prize-item bronze">🥉 3rd &nbsp;— ₹1,000</div>
+                    <div class="prize-row gold">🥇 1st Place <span class="prize-tbd">— Prize TBA</span></div>
+                    <div class="prize-row silver">🥈 2nd Place <span class="prize-tbd">— Prize TBA</span></div>
+                    <div class="prize-row bronze">🥉 3rd Place <span class="prize-tbd">— Prize TBA</span></div>
                 </div>
-                <p class="card-hint">👆 Tap for rules & info</p>
+                <p class="event-hint">👆 Tap below for full rules & guidelines</p>
+                <div class="event-card-actions">
+                    <a href="Line_Following_detailed.pdf" target="_blank" class="btn-rules">📄 Rules PDF</a>
+                    <a href="#" class="btn-register">Register →</a>
+                </div>
             </div>
-        </a>
-        <a href="robotics.html">
-            <div class="card">
-                <img src="robotics.jpg" alt="Robotics Events">
-                <h3>🤖 Robotics Events</h3>
+        </div>
+
+        <!-- ROBO RACE -->
+        <div class="event-card reveal">
+            <img class="event-card-img"
+                 src="https://images.unsplash.com/photo-1561144257-e32e8506b7cb?w=600&q=80"
+                 alt="Robo Race">
+            <div class="event-card-body">
+                <h3>🏎️ Robo Race</h3>
+                <p class="event-card-desc">RC car races through a closed loop track with uneven surfaces, ramps, sand pits and static obstacles. Fastest lap time wins.</p>
                 <div class="prize-list">
-                    <div class="prize-item gold">🥇 1st &nbsp;— ₹8,000</div>
+                    <div class="prize-row gold">🥇 1st Place <span class="prize-tbd">— Prize TBA</span></div>
+                    <div class="prize-row silver">🥈 2nd Place <span class="prize-tbd">— Prize TBA</span></div>
+                    <div class="prize-row bronze">🥉 3rd Place <span class="prize-tbd">— Prize TBA</span></div>
                 </div>
-                <p class="card-hint">👆 Tap for rules & info</p>
+                <p class="event-hint">👆 Tap below for full rules & guidelines</p>
+                <div class="event-card-actions">
+                    <a href="rc_robo_race.pdf" target="_blank" class="btn-rules">📄 Rules PDF</a>
+                    <a href="#" class="btn-register">Register →</a>
+                </div>
             </div>
-        </a>
-    </div>
+        </div>
 
-    <div class="cta">
-        <h2>🚀 Ready to Participate?</h2>
-        <button class="cta-btn">🔥 Register Now</button>
     </div>
+</section>
 
-    <div class="about">
-        <h2>🌍 What is IP Day?</h2>
-        <p>World Intellectual Property (IP) Day is celebrated to recognize the importance of creativity and innovation in shaping our world. It highlights how patents, copyrights, and trademarks protect the ideas of creators and encourage progress in technology, art, and business. This day inspires people to respect intellectual work and promotes awareness about the value of original creations.</p>
+<!-- ══ WHY PARTICIPATE ══ -->
+<section class="alt section-center">
+    <div class="reveal">
+        <span class="section-pill">Why Join Us</span>
+        <h2 class="section-title">Why Participate?</h2>
     </div>
-</div>
+    <div class="why-grid">
+        <div class="why-item reveal">
+            <div class="why-dot"></div>
+            <p>Build real-world autonomous and RC robotics skills that go beyond classroom theory</p>
+        </div>
+        <div class="why-item reveal">
+            <div class="why-dot"></div>
+            <p>Compete with talented engineers and teams from colleges across the region</p>
+        </div>
+        <div class="why-item reveal">
+            <div class="why-dot"></div>
+            <p>Win exciting cash prizes and receive official certificates of participation</p>
+        </div>
+        <div class="why-item reveal">
+            <div class="why-dot"></div>
+            <p>Get recognized by industry professionals, faculty and innovation leaders</p>
+        </div>
+        <div class="why-item reveal">
+            <div class="why-dot"></div>
+            <p>Network with fellow innovators, mentors and the Project & Innovation Lab team</p>
+        </div>
+        <div class="why-item reveal">
+            <div class="why-dot"></div>
+            <p>Showcase your robot design and engineering skills on a competitive stage</p>
+        </div>
+    </div>
+</section>
+
+<!-- ══ TIMELINE ══ -->
+<section class="section-center">
+    <div class="reveal">
+        <span class="section-pill">Important Dates</span>
+        <h2 class="section-title">Event Timeline</h2>
+    </div>
+    <div class="timeline">
+        <div class="tl-item reveal">
+            <div class="tl-dot">🚀</div>
+            <div class="tl-date">Now Open</div>
+            <div class="tl-label">Registrations Open</div>
+        </div>
+        <div class="tl-item reveal">
+            <div class="tl-dot">⏰</div>
+            <div class="tl-date">20 April 2026</div>
+            <div class="tl-label">Registration Deadline</div>
+        </div>
+        <div class="tl-item reveal">
+            <div class="tl-dot">🤖</div>
+            <div class="tl-date">30 Apr – 1 May</div>
+            <div class="tl-label">Event Day</div>
+        </div>
+    </div>
+</section>
+
+<!-- ══ ORGANIZING COMMITTEE ══ -->
+<section class="alt section-center">
+    <div class="reveal">
+        <span class="section-pill">Organizing Committee</span>
+        <h2 class="section-title">Meet the Team</h2>
+    </div>
+    <div class="committee-grid">
+        <div class="person-card reveal">
+            <div class="person-photo">👨‍💼</div>
+            <div class="person-name">M.V. Dabhi</div>
+            <div class="person-role">Head of Department</div>
+        </div>
+        <div class="person-card reveal">
+            <div class="person-photo">👨‍🏫</div>
+            <div class="person-name">Prof. Urvish Soni</div>
+            <div class="person-role">Faculty Coordinator</div>
+        </div>
+        <div class="person-card reveal">
+            <div class="person-photo">👩‍🏫</div>
+            <div class="person-name">Prof. Zankhana Mehta</div>
+            <div class="person-role">Faculty Coordinator</div>
+        </div>
+    </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+    <div class="footer-grid">
+        <div class="footer-col reveal">
+            <h4>What is IP Day?</h4>
+            <p>World Intellectual Property Day is celebrated to recognize the importance of creativity and innovation in shaping our world. It highlights how patents, copyrights, and trademarks protect ideas and encourage progress in technology, art, and business. This day promotes awareness about the value of original creations.</p>
+        </div>
+        <div class="footer-col reveal">
+            <h4>Contact Us</h4>
+            <div class="footer-contact">
+                <div class="contact-item"><span>📞</span><span>8849930780</span></div>
+                <div class="contact-item"><span>✉️</span><span>kirtan.robodev@gmail.com</span></div>
+                <div class="contact-item"><span>📞</span><span>9574562442</span></div>
+                <div class="contact-item"><span>✉️</span><span>purv.robodev@gmail.com</span></div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <div class="footer-logos">
+            <img src="pi_lab_logo.jpg" alt="PI Lab" onerror="this.style.display='none'">
+            <img src="gp_logo.jpg" alt="GP Ahmedabad" onerror="this.style.display='none'">
+        </div>
+        <div class="footer-copy">© 2026 IP Day · Government Polytechnic Ahmedabad</div>
+    </div>
+</footer>
 
 <script>
-const eventDate = new Date("May 1, 2026").getTime();
-setInterval(() => {
+// ── COUNTDOWN ──
+const eventDate = new Date("April 30, 2026 09:00:00").getTime();
+function updateCountdown() {
     const d = eventDate - Date.now();
-    const days = Math.floor(d / 86400000);
-    const hrs  = Math.floor((d % 86400000) / 3600000);
-    const min  = Math.floor((d % 3600000)  / 60000);
-    document.getElementById("countdown").innerHTML =
-        "⏳ Starts in: " + days + "d " + hrs + "h " + min + "m";
-}, 1000);
+    if (d <= 0) {
+        document.getElementById("cd-days").textContent = "00";
+        document.getElementById("cd-hrs").textContent  = "00";
+        document.getElementById("cd-min").textContent  = "00";
+        document.getElementById("cd-sec").textContent  = "00";
+        return;
+    }
+    document.getElementById("cd-days").textContent = String(Math.floor(d / 86400000)).padStart(2,"0");
+    document.getElementById("cd-hrs").textContent  = String(Math.floor((d % 86400000) / 3600000)).padStart(2,"0");
+    document.getElementById("cd-min").textContent  = String(Math.floor((d % 3600000) / 60000)).padStart(2,"0");
+    document.getElementById("cd-sec").textContent  = String(Math.floor((d % 60000) / 1000)).padStart(2,"0");
+}
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
+// ── SCROLL REVEAL ──
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add("visible"); });
+}, { threshold: 0.12 });
+document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
 </script>
 
 </body>
