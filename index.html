@@ -90,8 +90,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    text-align: center;
-    padding: 120px 20px 80px;
+    padding: 120px 40px 80px;
     background:
         radial-gradient(ellipse at 20% 50%, #dbeafe55 0%, transparent 60%),
         radial-gradient(ellipse at 80% 20%, #eff6ff 0%, transparent 55%),
@@ -128,7 +127,112 @@ body {
     opacity: 0.4;
 }
 
-.hero-content { position: relative; z-index: 2; max-width: 760px; }
+/* TWO COLUMN WRAPPER */
+.hero-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    max-width: 1100px;
+    width: 100%;
+    position: relative;
+    z-index: 2;
+}
+
+.hero-content {
+    text-align: left;
+}
+
+/* ROBOT SIDE */
+.hero-robot {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.hero-robot .robot-ring {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    border: 1.5px solid var(--blue-mid);
+}
+
+.hero-robot .robot-ring-inner {
+    position: absolute;
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    border: 1px dashed #bfdbfe;
+}
+
+.hero-robot svg {
+    position: relative;
+    z-index: 2;
+    filter: drop-shadow(0 8px 24px rgba(37,99,235,0.12));
+}
+
+.robot-badge {
+    position: absolute;
+    background: var(--blue-lt);
+    border: 1px solid var(--blue-mid);
+    border-radius: 8px;
+    padding: 6px 12px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--blue);
+    z-index: 3;
+}
+
+.robot-badge.lfr  { top: 20px; right: 20px; }
+.robot-badge.race { bottom: 20px; left: 20px; }
+.robot-badge.fee  {
+    top: 50%;
+    right: -10px;
+    transform: translateY(-50%);
+    background: var(--navy);
+    color: white;
+    border-color: var(--navy);
+}
+
+/* adjust countdown + buttons for left align */
+.countdown { justify-content: flex-start; }
+.hero-btns  { justify-content: flex-start; }
+
+/* ── MOBILE HERO ── */
+@media (max-width: 768px) {
+    .hero {
+        padding: 100px 20px 60px;
+        min-height: auto;
+    }
+
+    .hero-inner {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .hero-content { text-align: center; }
+    .countdown    { justify-content: center; }
+    .hero-btns    { justify-content: center; }
+
+    /* robot becomes faded watermark behind text on mobile */
+    .hero-robot {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 0.06;
+        pointer-events: none;
+        z-index: 1;
+    }
+
+    .hero-robot .robot-ring,
+    .hero-robot .robot-ring-inner { display: none; }
+    .robot-badge { display: none; }
+    .hero-robot svg { width: 280px; height: 280px; }
+    .hero-content { position: relative; z-index: 2; }
+}
 
 .hero-pill {
     display: inline-block;
@@ -791,13 +895,15 @@ footer {
     text-align: center;
 }
 
+/* ══════════════════════════════
+   MOBILE
+══════════════════════════════ */
 @media (max-width: 768px) {
 
     .navbar { padding: 8px 14px; }
     .nav-logo img { height: 32px; max-width: 90px; }
     .nav-title { font-size: 13px; }
 
-    .hero { padding: 100px 16px 60px; min-height: auto; }
     .hero::after { width: 300px; height: 300px; }
 
     .countdown { gap: 10px; }
@@ -844,24 +950,77 @@ footer {
 
 <!-- ══ HERO ══ -->
 <section class="hero">
-    <div class="hero-content reveal">
-        <div class="hero-pill">IP Day 2026 · Government Polytechnic Ahmedabad</div>
-        <h1>Robotics<br><span>Competition</span></h1>
-        <p class="hero-sub">Line Following Robot &nbsp;·&nbsp; Robo Race &nbsp;·&nbsp; 30 April – 1 May 2026</p>
+    <div class="hero-inner">
 
-        <div class="countdown">
-            <div class="cd-box"><span class="cd-num" id="cd-days">--</span><span class="cd-label">Days</span></div>
-            <div class="cd-box"><span class="cd-num" id="cd-hrs">--</span><span class="cd-label">Hours</span></div>
-            <div class="cd-box"><span class="cd-num" id="cd-min">--</span><span class="cd-label">Mins</span></div>
-            <div class="cd-box"><span class="cd-num" id="cd-sec">--</span><span class="cd-label">Secs</span></div>
+        <!-- LEFT: content -->
+        <div class="hero-content reveal">
+            <div class="hero-pill">IP Day 2026 · Government Polytechnic Ahmedabad</div>
+            <h1>Robotics<br><span>Competition</span></h1>
+            <p class="hero-sub">Line Following Robot &nbsp;·&nbsp; Robo Race &nbsp;·&nbsp; 30 April – 1 May 2026</p>
+
+            <div class="countdown">
+                <div class="cd-box"><span class="cd-num" id="cd-days">--</span><span class="cd-label">Days</span></div>
+                <div class="cd-box"><span class="cd-num" id="cd-hrs">--</span><span class="cd-label">Hours</span></div>
+                <div class="cd-box"><span class="cd-num" id="cd-min">--</span><span class="cd-label">Mins</span></div>
+                <div class="cd-box"><span class="cd-num" id="cd-sec">--</span><span class="cd-label">Secs</span></div>
+            </div>
+
+            <div class="hero-btns">
+                <a href="#events" class="btn-primary">🤖 View Events</a>
+                <a href="#" class="btn-outline">Register Now →</a>
+            </div>
+
+            <p class="hero-prize">🏆 Prize Pool: <strong>To Be Announced</strong></p>
         </div>
 
-        <div class="hero-btns">
-            <a href="#events" class="btn-primary">🤖 View Events</a>
-            <a href="#" class="btn-outline">Register Now →</a>
+        <!-- RIGHT: robot illustration -->
+        <div class="hero-robot reveal">
+            <div class="robot-ring"></div>
+            <div class="robot-ring-inner"></div>
+
+            <span class="robot-badge lfr">〰️ LFR</span>
+            <span class="robot-badge race">🏎️ Race</span>
+            <span class="robot-badge fee">₹400/team</span>
+
+            <svg width="200" height="220" viewBox="0 0 120 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- head -->
+                <rect x="28" y="20" width="64" height="46" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+                <!-- eyes -->
+                <circle cx="46" cy="38" r="10" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+                <circle cx="74" cy="38" r="10" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+                <circle cx="46" cy="38" r="4" fill="#2563eb"/>
+                <circle cx="74" cy="38" r="4" fill="#2563eb"/>
+                <circle cx="48" cy="36" r="1.5" fill="white"/>
+                <circle cx="76" cy="36" r="1.5" fill="white"/>
+                <!-- mouth -->
+                <rect x="46" y="54" width="28" height="5" rx="2.5" fill="#2563eb" opacity="0.35"/>
+                <!-- antenna -->
+                <line x1="60" y1="8" x2="60" y2="20" stroke="#2563eb" stroke-width="2" stroke-linecap="round"/>
+                <circle cx="60" cy="6" r="5" fill="#2563eb"/>
+                <circle cx="60" cy="6" r="2" fill="white"/>
+                <!-- arms -->
+                <rect x="6" y="34" width="22" height="14" rx="5" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+                <rect x="92" y="34" width="22" height="14" rx="5" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+                <!-- hand circles -->
+                <circle cx="10" cy="41" r="3" fill="#2563eb" opacity="0.4"/>
+                <circle cx="110" cy="41" r="3" fill="#2563eb" opacity="0.4"/>
+                <!-- body -->
+                <rect x="28" y="68" width="64" height="38" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+                <!-- chest panel -->
+                <rect x="40" y="76" width="40" height="22" rx="5" fill="#dbeafe" stroke="#2563eb" stroke-width="1"/>
+                <!-- chest lights -->
+                <circle cx="50" cy="87" r="3" fill="#2563eb"/>
+                <circle cx="60" cy="87" r="3" fill="#60a5fa"/>
+                <circle cx="70" cy="87" r="3" fill="#2563eb" opacity="0.5"/>
+                <!-- legs -->
+                <rect x="38" y="106" width="16" height="20" rx="5" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+                <rect x="66" y="106" width="16" height="20" rx="5" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+                <!-- feet -->
+                <rect x="34" y="122" width="24" height="8" rx="4" fill="#2563eb" opacity="0.6"/>
+                <rect x="62" y="122" width="24" height="8" rx="4" fill="#2563eb" opacity="0.6"/>
+            </svg>
         </div>
 
-        <p class="hero-prize">🏆 Prize Pool: <strong>To Be Announced</strong></p>
     </div>
 </section>
 
@@ -899,7 +1058,7 @@ footer {
         <!-- LINE FOLLOWER -->
         <div class="event-card reveal">
             <img class="event-card-img"
-                 src="line_following.jpg"
+                 src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&q=80"
                  alt="Line Following Robot">
             <div class="event-card-body">
                 <h3>〰️ Line Following Robot</h3>
@@ -920,7 +1079,7 @@ footer {
         <!-- ROBO RACE -->
         <div class="event-card reveal">
             <img class="event-card-img"
-                 src="robo_race.jpg"
+                 src="https://images.unsplash.com/photo-1561144257-e32e8506b7cb?w=600&q=80"
                  alt="Robo Race">
             <div class="event-card-body">
                 <h3>🏎️ Robo Race</h3>
@@ -1013,7 +1172,7 @@ footer {
             <div class="person-role">Head of Department</div>
         </div>
         <div class="person-card reveal">
-            <div class="person-photo">👨</div>
+            <div class="person-photo">👨‍🏫</div>
             <div class="person-name">Prof. Urvish Soni</div>
             <div class="person-role">Faculty Coordinator</div>
         </div>
@@ -1036,9 +1195,9 @@ footer {
             <h4>Contact Us</h4>
             <div class="footer-contact">
                 <div class="contact-item"><span>📞</span><span>8849930780</span></div>
-                <div class="contact-item"><span>✉️</span><span>kirtan.robodev@gmail.com</span></div>
+                <div class="contact-item"><span>✉️</span><span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b2d9dbc0c6d3dc9cc0ddd0ddd6d7c4f2d5dfd3dbde9cd1dddf">[email&#160;protected]</a></span></div>
                 <div class="contact-item"><span>📞</span><span>9574562442</span></div>
-                <div class="contact-item"><span>✉️</span><span>purv.robodev@gmail.com</span></div>
+                <div class="contact-item"><span>✉️</span><span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1c6c696e6a326e737e7378796a5c7b717d7570327f7371">[email&#160;protected]</a></span></div>
             </div>
         </div>
     </div>
@@ -1051,7 +1210,7 @@ footer {
     </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // ── COUNTDOWN ──
 const eventDate = new Date("April 30, 2026 09:00:00").getTime();
 function updateCountdown() {
@@ -1067,16 +1226,3 @@ function updateCountdown() {
     document.getElementById("cd-hrs").textContent  = String(Math.floor((d % 86400000) / 3600000)).padStart(2,"0");
     document.getElementById("cd-min").textContent  = String(Math.floor((d % 3600000) / 60000)).padStart(2,"0");
     document.getElementById("cd-sec").textContent  = String(Math.floor((d % 60000) / 1000)).padStart(2,"0");
-}
-updateCountdown();
-setInterval(updateCountdown, 1000);
-
-// ── SCROLL REVEAL ──
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add("visible"); });
-}, { threshold: 0.12 });
-document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
-</script>
-
-</body>
-</html>
