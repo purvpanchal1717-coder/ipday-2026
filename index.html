@@ -209,31 +209,39 @@ body {
         min-height: auto;
     }
 
+    /* make inner relative so robot can absolute inside it */
     .hero-inner {
-        grid-template-columns: 1fr;
-        gap: 0;
+        display: block;
+        position: relative;
     }
 
-    .hero-content { text-align: center; }
-    .countdown    { justify-content: center; }
-    .hero-btns    { justify-content: center; }
+    .hero-content {
+        text-align: center;
+        position: relative;
+        z-index: 2;
+    }
 
-    /* robot becomes faded watermark behind text on mobile */
+    .countdown { justify-content: center; }
+    .hero-btns { justify-content: center; }
+
+    /* robot out of flow — sits as watermark behind content */
     .hero-robot {
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        opacity: 0.06;
+        opacity: 0.07;
         pointer-events: none;
-        z-index: 1;
+        z-index: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
     .hero-robot .robot-ring,
     .hero-robot .robot-ring-inner { display: none; }
     .robot-badge { display: none; }
-    .hero-robot svg { width: 280px; height: 280px; }
-    .hero-content { position: relative; z-index: 2; }
+    .hero-robot svg { width: 260px; height: 260px; }
 }
 
 .hero-pill {
@@ -976,7 +984,7 @@ footer {
         </div>
 
         <!-- RIGHT: robot illustration -->
-        <div class="hero-robot reveal">
+        <div class="hero-robot">
             <div class="robot-ring"></div>
             <div class="robot-ring-inner"></div>
 
@@ -1043,7 +1051,7 @@ footer {
         <div class="info-card reveal">
             <span class="info-icon">💰</span>
             <h3>Registration Fee</h3>
-            <p>₹500 per team</p>
+            <p>₹400 per team</p>
         </div>
     </div>
 </div>
@@ -1060,7 +1068,7 @@ footer {
         <!-- LINE FOLLOWER -->
         <div class="event-card reveal">
             <img class="event-card-img"
-                 src="Line_follower.jpg"
+                 src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&q=80"
                  alt="Line Following Robot">
             <div class="event-card-body">
                 <h3>〰️ Line Following Robot</h3>
@@ -1081,7 +1089,7 @@ footer {
         <!-- ROBO RACE -->
         <div class="event-card reveal">
             <img class="event-card-img"
-                 src="robo_race.jpg"
+                 src="https://images.unsplash.com/photo-1561144257-e32e8506b7cb?w=600&q=80"
                  alt="Robo Race">
             <div class="event-card-body">
                 <h3>🏎️ Robo Race</h3>
