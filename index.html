@@ -46,6 +46,8 @@ body {
     opacity: 1;
     transform: none;
 }
+/* fallback — if JS fails, show everything */
+.no-js .reveal { opacity: 1; transform: none; }
 
 /* ══════════════════════════════
    NAVBAR
@@ -1226,3 +1228,24 @@ function updateCountdown() {
     document.getElementById("cd-hrs").textContent  = String(Math.floor((d % 86400000) / 3600000)).padStart(2,"0");
     document.getElementById("cd-min").textContent  = String(Math.floor((d % 3600000) / 60000)).padStart(2,"0");
     document.getElementById("cd-sec").textContent  = String(Math.floor((d % 60000) / 1000)).padStart(2,"0");
+}
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
+// ── SCROLL REVEAL ──
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add("visible"); });
+}, { threshold: 0.08, rootMargin: "0px 0px -40px 0px" });
+
+document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+
+// force-trigger anything already in viewport on load
+window.addEventListener("load", () => {
+    document.querySelectorAll(".reveal").forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight) el.classList.add("visible");
+    });
+});
+</script>
+</body>
+</html>
